@@ -1,0 +1,470 @@
+*{
+    font-family: "Lato";
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+$green: #11A77D;
+$blue: #0878A0;
+$red: #F31303;
+$black: #000;
+$white: #fff;
+@font-face {
+    font-family: "Lato";
+    src: url(../font/Lato-Regular.ttf);
+}
+@mixin flex($justify,$align,$gap){
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    gap: $gap;
+    list-style: none;
+}
+@mixin btns($back,$width,$height,$radius,$color,$font){
+    background-color: $back;
+    width: $width;
+    height: $height;
+    border-radius: $radius;
+    border: none;
+    cursor: pointer;
+    color: $color;
+    font-size: $font;
+}
+@mixin section($width,$height,$color){
+    width: $width;
+    height: $height;
+    color: $color;
+    margin: auto;
+}
+@mixin images($width,$height,$radius){
+    width: $width;
+    height: $height;
+    border-radius: $radius;
+}
+@mixin main-boxes($width,$height,$back,$radius,$mleft){
+    width: $width;
+    height: $height;
+    background-color: $back;
+    border-radius: $radius;
+    font-size: 50px;
+    color: $white;
+    transform: rotate(45deg);
+    div{
+        transform: rotate(-45deg);
+    }
+    margin-left: $mleft;
+}
+@mixin a{
+    color: $white;
+    text-decoration: none;
+}
+@mixin h2-before-after{
+    h2{
+        position: relative;
+    }
+    h2::after{
+        content: "*";
+        color: $red;
+        font-size: 24px;
+        top:8px;
+        right: 100px;
+        position: absolute;
+    }
+    h2::before{
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 40px;
+        border-radius: 1px;
+        height: 3px;
+        background-color: $green;
+    }
+}
+@mixin do-card($back){
+    background-color: $back;
+    border-radius: 10px;
+    i{
+        font-size: 45px;
+    }
+    @include flex(center,center,20px);
+}
+#switch-to-light{
+    display: none;
+    background-color: #d2b6ff;
+    color: #000;
+}
+.dark-bg{
+    background-color: #000 !important;
+    color: #fff !important;
+    box-shadow: 0 0 0 #fff !important;
+    .draw-image{
+        img{
+            z-index: 5;
+        }
+    }
+    .skills-section::after{
+        background-color: #000 !important;
+    }
+}
+.head-section{
+    @include flex(space-between , center , 0);
+    padding: 15px 20px;
+}
+.head-section{
+    img{
+        width: 120px;
+    }
+}
+.main-div{
+    @include flex(left, center,140px);
+    width: 90%;
+    padding-top: 50px;
+    margin: auto;
+}
+.arrow-btns{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    button{
+        @include btns($green,35px,35px,10px,$black,18px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .lefti{
+        margin-left: -20px;
+    }
+}
+.main-txts{
+    @include flex(center, left, 20px);
+    flex-direction: column;
+    h1{
+        font-size: 45px;
+    }
+    p{
+        width: 200px
+    }
+    button{
+        @include btns($red,130px ,40px , 5px,$white,18px);
+    }
+}
+.main-images{
+    img{
+        @include images(400px,400px ,10px);
+        box-shadow: 0 0 5px $black;
+        transform: rotate(135deg);
+    }
+}
+.main-boxes{
+    @for $box-item from 1 through 3{
+        .box#{$box-item}{
+            @include flex(center,center, 10px);
+        }
+    }
+    .box1{
+        @include main-boxes(150px,150px,$blue , 10px,-100px);
+        
+    }
+    .box2{
+        @include main-boxes(150px,150px,$green,10px,-10px);
+        
+    }
+    .box3{
+        @include main-boxes(150px,150px,$red,10px,-100px);
+    }
+}
+header{
+    @include flex(center,center,0);
+    @include section(100%,60px,$white);
+    background-color: $green;
+    margin-top: 90px;
+    .header{
+        @include section(80%,50px,$white);
+        background-color: $green;
+        @include flex(space-between,center,0);
+        .header-nav{
+            ul{
+                @include flex(left,center ,50px);
+                a{
+                    @include a();
+                }
+            }
+        }
+        .header-end{
+            @include flex(center,center,20px);
+            a{
+                @include a();
+            }
+        }
+    }
+}
+main{
+    padding-top: 150px;
+}
+.draw-section{
+    .draw-div{
+        @include section(55%,auto,#000);
+        background-color: $white;
+        @include flex(space-between,center,200px);
+        .draw-image{
+            $box-item: 0;
+            @while($box-item <= 3){
+                .box#{$box-item}{
+                    position: absolute;
+                }
+                $box-item: $box-item + 1;
+            }
+            .box1{
+                @include main-boxes(80px,80px,$green,10px,-120px);
+                top: 30px;
+                left: 10px;
+            }
+            .box2{
+                @include main-boxes(80px,80px,$blue,10px,-120px);
+                top: 110px;
+                left: -65px;
+            }
+            .box3{
+                @include main-boxes(80px,80px,$red,10px,-120px);
+                top: 190px;
+                left: 10px;
+            }
+            @include flex(center,center,0);
+            position: relative;
+            img{
+                @include images(280px,280px,20px);
+            }
+            .draw-back{
+                @include images(300px,300px,20px);
+                position: absolute;
+                top: 0px;
+                transform: rotate(45deg);
+                left: -5px;
+                box-shadow: 0 0 5px $black;
+                z-index: 2;
+            }
+        }
+        .draw-txts{
+            @include h2-before-after();
+            p{
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            button{
+                @include btns($red,150px,40px,10px,$white,15px);
+            }
+            h2::after{
+                right: 80px;
+            }
+        }
+    }
+}
+.do-section{
+    padding-top: 150px;
+    padding-bottom: 100px;
+    .do-div{
+        @include section(80%,auto,#000);
+        @include h2-before-after();
+        h2{
+            width: 250px;
+            margin-left: 10px;
+        }
+    }
+}
+.do-cards{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    padding: 10px;
+    gap: 20px;
+    width: 80%;
+    margin: auto;
+    div{
+        margin-top: 30px;
+        
+        text-align: center;
+    }
+    .do-card-green{
+        @include do-card($green);
+        flex-direction: column;
+        color: $white;
+        padding: 20px;
+        height: 260px;
+    }
+    .do-card-red{
+        @include do-card($red);
+        flex-direction: column;
+        color: $white;
+        padding: 20px;
+        height: 260px;
+    }
+}
+.skills-section::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    opacity: 0.3;
+    background-color: $green;
+    width: 100%;
+    height: 100%;
+}
+.skills-section{
+    @include section(100%,auto,$white);
+    background-color: $green;
+    background-image: url(../images/code-back.jpg);
+    position: relative;
+    .skills-div{
+        padding: 50px;
+        position: relative;
+        flex-direction: column;
+        width: 70%;
+        margin: auto;
+        @include flex(right,right,60px);
+        .skills-head{
+            text-align: right;
+            @include flex(right,center,0);
+            @include h2-before-after();
+            h2::before{
+                background-color: $white;
+            }
+            h2::after{
+                color: $white;
+                right: -20px;
+            }
+        }
+        .skills-body{
+            @include flex(center,center,50px);
+            .circle{
+                @include flex(center,center,10px);
+                flex-direction: column;
+                p{
+                    font-size: 21px;
+                }
+            }
+            .inner{
+                @include flex(center,center,0);
+                font-size: 18px;
+            }
+            .deg-75{
+                border: 5px solid #fff;
+                border-radius: 50%;
+                width: 150px;
+                height: 150px;
+                border-left: none;
+                border-top: none;
+            }
+            .deg-50{
+                @extend .deg-75;
+                border-bottom: none;
+            }
+        }
+    }
+}
+.end-txt{
+    padding-top: 50px;
+    @include section(80%,100px,$white);
+    background-color: $white;
+    @include h2-before-after();
+    h2::after{
+        color: $red;
+    }
+    h2{
+        width: 260px;
+        color: #000;
+    }
+}
+.end-head{
+    @include flex(center,center,20px);
+}
+.button {
+    position: relative;
+    padding: 10px 22px;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    background-color: #7d2ae8;
+    transition: all 0.2s ease;
+  }
+  
+  .button:active {
+    transform: scale(0.96);
+  }
+  
+  .button:before,
+  .button:after {
+    position: absolute;
+    content: "";
+    width: 150%;
+    left: 50%;
+    height: 100%;
+    transform: translateX(-50%);
+    z-index: -1000;
+    background-repeat: no-repeat;
+  }
+  
+  .button:hover:before {
+    top: -70%;
+    background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, transparent 20%, #7d2ae8 20%, transparent 30%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+    background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
+      10% 10%, 18% 18%;
+    background-position: 50% 120%;
+    animation: greentopBubbles 0.6s ease;
+  }
+  
+  @keyframes greentopBubbles {
+    0% {
+      background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,
+        40% 90%, 55% 90%, 70% 90%;
+    }
+  
+    50% {
+      background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%,
+        50% 50%, 65% 20%, 90% 30%;
+    }
+  
+    100% {
+      background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%,
+        50% 40%, 65% 10%, 90% 20%;
+      background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    }
+  }
+  
+  .button:hover::after {
+    bottom: -70%;
+    background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+    background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%, 18% 18%;
+    background-position: 50% 0%;
+    animation: greenbottomBubbles 0.6s ease;
+  }
+  
+  @keyframes greenbottomBubbles {
+    0% {
+      background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
+        70% -10%, 70% 0%;
+    }
+  
+    50% {
+      background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%,
+        105% 0%;
+    }
+    100% {
+      background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
+        110% 10%;
+      background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    }
+  }
